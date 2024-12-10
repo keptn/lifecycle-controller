@@ -72,7 +72,7 @@ image:
 ## @param     image.repository specify repo for manager image
   repository: keptn/certificate-operator
 ## @param     image.tag select tag for manager container
-  tag: v3.0.0 # x-release-please-version
+  tag: v3.0.1 # x-release-please-version
 ## @param   image.imagePullPolicy specify pull policy for the manager image. This overrides global values
   imagePullPolicy: ""
 ## @extra     livenessProbe custom RBAC proxy liveness probe
