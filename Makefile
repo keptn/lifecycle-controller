@@ -2,7 +2,7 @@
 
 # renovate: datasource=github-tags depName=kubernetes-sigs/kustomize
 KUSTOMIZE_VERSION?=v5.5.0
-CHART_APPVERSION ?= v2.4.0 # x-release-please-version
+CHART_APPVERSION ?= v2.4.1 # x-release-please-version
 
 # renovate: datasource=docker depName=cytopia/yamllint
 YAMLLINT_VERSION ?= alpine

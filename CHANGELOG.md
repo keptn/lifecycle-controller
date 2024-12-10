@@ -1,5 +1,24 @@
 # Changelog
 
+## [2.4.1](https://github.com/keptn/lifecycle-toolkit/compare/keptn-v2.4.0...keptn-v2.4.1) (2024-12-10)
+
+
+### Other
+
+* backport Keptn helm chart version ([#3859](https://github.com/keptn/lifecycle-toolkit/issues/3859)) ([1f16c91](https://github.com/keptn/lifecycle-toolkit/commit/1f16c9176362c8984d08569024d676a19ecd24e8))
+
+
+### Docs
+
+* add css change to remove back button when screen size is reduced ([#3873](https://github.com/keptn/lifecycle-toolkit/issues/3873)) ([9a6dbc9](https://github.com/keptn/lifecycle-toolkit/commit/9a6dbc9fd7550f547452705cdf36fae18ee21d97))
+* fix broken link ([#3874](https://github.com/keptn/lifecycle-toolkit/issues/3874)) ([1a7e6fa](https://github.com/keptn/lifecycle-toolkit/commit/1a7e6fa2cb0590a222b976e58aa4a78bfa13ddd5))
+* new landing page design ([#3870](https://github.com/keptn/lifecycle-toolkit/issues/3870)) ([4659fed](https://github.com/keptn/lifecycle-toolkit/commit/4659fed50f7dab6992a343051fabbef16b17dc9f))
+
+
+### Dependency Updates
+
+* update github/codeql-action action to v3.27.1 ([#3861](https://github.com/keptn/lifecycle-toolkit/issues/3861)) ([ea484b8](https://github.com/keptn/lifecycle-toolkit/commit/ea484b87d6cbc56c938e64dad433214429536383))
+
 ## [2.4.0](https://github.com/keptn/lifecycle-toolkit/compare/keptn-v2.3.0...keptn-v2.4.0) (2024-11-11)
 
 
