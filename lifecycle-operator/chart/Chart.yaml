@@ -28,8 +28,8 @@ annotations:
   artifacthub.io/operatorCapabilities: Full Lifecycle
 kubeVersion: '>= 1.27.0-0'
 type: application
-version: 0.6.0 # Helm Chart version
-appVersion: v2.0.0 # x-release-please-version
+version: 3.0.0
+appVersion: v2.0.0
 dependencies:
   - name: common
     repository: https://charts.lifecycle.keptn.sh
