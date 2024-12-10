@@ -35,7 +35,7 @@ To run the converter, execute the following command:
 
 <!---x-release-please-start-version-->
 ```shell
-METRICS_OPERATOR_IMAGE=ghcr.io/keptn/metrics-operator:v2.0.0
+METRICS_OPERATOR_IMAGE=ghcr.io/keptn/metrics-operator:v2.0.1
 PATH_TO_SLO=<PATH_TO_SLO>
 ANALYSIS_VALUE_TEMPLATE_NAMESPACE=<ANALYSIS_VALUE_TEMPLATE_NAMESPACE>
 ANALYSIS_DEFINITION_NAME=<ANALYSIS_DEFINITION_NAME>

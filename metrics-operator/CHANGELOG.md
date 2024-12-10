@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/keptn/lifecycle-toolkit/compare/metrics-operator-v2.0.0...metrics-operator-v2.0.1) (2024-12-10)
+
+
+### Other
+
+* bump helm chart versions ([#3857](https://github.com/keptn/lifecycle-toolkit/issues/3857)) ([1873178](https://github.com/keptn/lifecycle-toolkit/commit/1873178a28878c0a12ce00e20a8e62d105068fe5))
+
 ## [2.0.0](https://github.com/keptn/lifecycle-toolkit/compare/metrics-operator-v1.1.1...metrics-operator-v2.0.0) (2024-11-11)
 
 
