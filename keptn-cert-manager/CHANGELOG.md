@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.0.1](https://github.com/keptn/lifecycle-toolkit/compare/cert-manager-v3.0.0...cert-manager-v3.0.1) (2024-12-10)
+
+
+### Other
+
+* bump helm chart versions ([#3857](https://github.com/keptn/lifecycle-toolkit/issues/3857)) ([1873178](https://github.com/keptn/lifecycle-toolkit/commit/1873178a28878c0a12ce00e20a8e62d105068fe5))
+* polish helm charts ([#3853](https://github.com/keptn/lifecycle-toolkit/issues/3853)) ([17fa47b](https://github.com/keptn/lifecycle-toolkit/commit/17fa47b16fb43bb627a466e999851bc1f225e878))
+
 ## [3.0.0](https://github.com/keptn/lifecycle-toolkit/compare/cert-manager-v2.2.2...cert-manager-v3.0.0) (2024-11-11)
 
 
