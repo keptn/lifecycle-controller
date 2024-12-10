@@ -2,6 +2,7 @@ package prometheus
 
 import (
 	"context"
+	"crypto/tls"
 	"errors"
 	"net/http"
 
@@ -40,7 +41,13 @@ func (r RoundTripperRetriever) GetRoundTripper(ctx context.Context, provider met
 		}
 		return nil, err
 	}
-	return config.NewBasicAuthRoundTripper(secret.User, secret.Password, "", "", promapi.DefaultRoundTripper), nil
+
+	transport := promapi.DefaultRoundTripper.(*http.Transport)
+	transport.TLSClientConfig = &tls.Config{
+		InsecureSkipVerify: provider.Spec.InsecureSkipTlsVerify,
+	}
+
+	return config.NewBasicAuthRoundTripper(secret.User, secret.Password, "", "", transport), nil
 }
 
 func getPrometheusSecret(ctx context.Context, provider metricsapi.KeptnMetricsProvider, k8sClient client.Client) (*SecretData, error) {
@@ -51,7 +58,6 @@ func getPrometheusSecret(ctx context.Context, provider metricsapi.KeptnMetricsPr
 	if err := k8sClient.Get(ctx, types.NamespacedName{Name: provider.Spec.SecretKeyRef.Name, Namespace: provider.Namespace}, secret); err != nil {
 		return nil, err
 	}
-
 	var secretData SecretData
 	user, ok := secret.Data[secretKeyUserName]
 	pw, yes := secret.Data[secretKeyPassword]

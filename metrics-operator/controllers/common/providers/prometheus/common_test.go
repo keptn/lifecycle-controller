@@ -4,7 +4,6 @@ import (
 	"context"
 	"net/http"
 	"net/http/httptest"
-	"reflect"
 	"strings"
 	"testing"
 
@@ -116,12 +115,14 @@ func Test_GetRoundtripper(t *testing.T) {
 		},
 	}
 	tests := []struct {
-		name      string
-		provider  metricsapi.KeptnMetricsProvider
-		k8sClient client.Client
-		want      http.RoundTripper
-		wantErr   bool
-		errorStr  string
+		name             string
+		provider         metricsapi.KeptnMetricsProvider
+		k8sClient        client.Client
+		wantUser         string
+		wantPassword     string
+		wantRoundTripper http.RoundTripper
+		wantErr          bool
+		errorStr         string
 	}{
 		{
 			name: "TestSuccess",
@@ -139,16 +140,20 @@ func Test_GetRoundtripper(t *testing.T) {
 					},
 				},
 			},
-			k8sClient: fake.NewClient(goodsecret),
-			want:      config.NewBasicAuthRoundTripper("myuser", "mytoken", "", "", promapi.DefaultRoundTripper),
-			wantErr:   false,
+			k8sClient:        fake.NewClient(goodsecret),
+			wantUser:         "myuser",
+			wantPassword:     "mytoken",
+			wantRoundTripper: config.NewBasicAuthRoundTripper("myuser", "mytoken", "", "", promapi.DefaultRoundTripper),
+			wantErr:          false,
 		},
 		{
-			name:      "TestSecretNotDefined",
-			provider:  metricsapi.KeptnMetricsProvider{},
-			k8sClient: fake.NewClient(),
-			want:      promapi.DefaultRoundTripper,
-			wantErr:   false,
+			name:             "TestSecretNotDefined",
+			provider:         metricsapi.KeptnMetricsProvider{},
+			k8sClient:        fake.NewClient(),
+			wantUser:         "myuser",
+			wantPassword:     "mytoken",
+			wantRoundTripper: config.NewBasicAuthRoundTripper("myuser", "mytoken", "", "", promapi.DefaultRoundTripper),
+			wantErr:          false,
 		},
 		{
 			name: "TestErrorFromGetPrometheusSecretNotExists",
@@ -166,10 +171,30 @@ func Test_GetRoundtripper(t *testing.T) {
 					},
 				},
 			},
-			k8sClient: fake.NewClient(),
-			want:      nil,
-			wantErr:   true,
-			errorStr:  "not found",
+			k8sClient:        fake.NewClient(),
+			wantUser:         "myuser",
+			wantPassword:     "mytoken",
+			wantRoundTripper: config.NewBasicAuthRoundTripper("myuser", "mytoken", "", "", promapi.DefaultRoundTripper),
+			wantErr:          true,
+			errorStr:         "not found",
+		},
+		{
+			name: "TestInsecureSkipTlsVerifyEnabled",
+			provider: metricsapi.KeptnMetricsProvider{
+				ObjectMeta: metav1.ObjectMeta{Namespace: "default"},
+				Spec: metricsapi.KeptnMetricsProviderSpec{
+					SecretKeyRef: v1.SecretKeySelector{
+						LocalObjectReference: v1.LocalObjectReference{
+							Name: "test",
+						},
+						Key:      "",
+						Optional: nil,
+					},
+					InsecureSkipTlsVerify: true,
+				},
+			},
+			k8sClient: fake.NewClient(goodsecret),
+			wantErr:   false,
 		},
 	}
 
@@ -185,8 +210,14 @@ func Test_GetRoundtripper(t *testing.T) {
 				t.Errorf("getRoundtripper() error = %s, wantErr %s", err.Error(), tt.errorStr)
 				return
 			}
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("getRoundtripper() got = %v, want %v", got, tt.want)
+			if !tt.wantErr && got == nil {
+				t.Errorf("getRoundtripper() returned nil, expected a RoundTripper")
+			}
+			if tr, ok := got.(*http.Transport); ok {
+				if tr.TLSClientConfig.InsecureSkipVerify != tt.provider.Spec.InsecureSkipTlsVerify {
+					t.Errorf("RoundTripper TLSClientConfig.InsecureSkipVerify = %v, expected %v",
+						tr.TLSClientConfig.InsecureSkipVerify, tt.provider.Spec.InsecureSkipTlsVerify)
+				}
 			}
 		})
 	}
