@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
         - name: test-prometheus
-          image: curlimages/curl:8.11.0
+          image: curlimages/curl:8.11.1
           env:
             - name: NAME
               value: (replace_all($namespace, '-', ''))
@@ -26,7 +26,7 @@ spec:
                 exit 1
               fi
         - name: test-api-endpoint
-          image: curlimages/curl:8.11.0
+          image: curlimages/curl:8.11.1
           env:
             - name: NAME
               value: (replace_all($namespace, '-', ''))
