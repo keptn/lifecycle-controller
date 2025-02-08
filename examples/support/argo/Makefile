@@ -2,7 +2,7 @@ LFC_NAMESPACE ?= keptn-system
 PODTATO_NAMESPACE ?= podtato-kubectl
 ARGO_NAMESPACE ?= argocd
 # renovate: datasource=github-tags depName=argoproj/argo-cd
-ARGO_VERSION ?= v2.13.1
+ARGO_VERSION ?= v2.13.5
 ARGO_SECRET = $(shell kubectl -n ${ARGO_NAMESPACE} get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo)
 
 .PHONY: install
