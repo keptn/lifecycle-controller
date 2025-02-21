@@ -73,6 +73,6 @@ require (
 )
 
 replace (
-	golang.org/x/net => golang.org/x/net v0.30.0
+	golang.org/x/net => golang.org/x/net v0.35.0
 	google.golang.org/protobuf => google.golang.org/protobuf v1.35.1
 )
