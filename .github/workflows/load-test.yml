@@ -28,7 +28,7 @@ jobs:
 
       - name: Cache build tools
         id: cache-build-tools
-        uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4
+        uses: actions/cache@0c907a75c2c80ebcb7f088228285e798b750cf8f # v4
         with:
           path: /usr/local/bin/kube-burner
           key: kube-burner-${{ env.KUBE_BURNER_VERSION }}
@@ -57,7 +57,7 @@ jobs:
 
       - name: Upload results
         if: always()
-        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4.4.3
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
         with:
           name: load-tests-results
           path: ./collected-metrics
@@ -69,7 +69,7 @@ jobs:
 
       - name: Upload cluster logs
         if: failure()
-        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4.4.3
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
         with:
           name: logs-load-tests
           path: .github/scripts/logs

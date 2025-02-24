@@ -91,7 +91,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Set up Go 1.x
-        uses: actions/setup-go@41dfa10bad2bb2ae585af6ee5bb4d7d973ad74ed # v5
+        uses: actions/setup-go@f111f3307d8850f501ac008e886eec1fd1932a34 # v5
         with:
           go-version: ${{ env.GO_VERSION }}
           cache: true
@@ -139,17 +139,17 @@ jobs:
 
       - name: Cache build tools
         id: cache-build-tools
-        uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4
+        uses: actions/cache@0c907a75c2c80ebcb7f088228285e798b750cf8f # v4
         with:
           path: ./${{ matrix.config.folder }}bin
           key: build-tools-${{ github.ref_name }}
 
       - name: Set up Docker Buildx
         id: buildx
-        uses: docker/setup-buildx-action@c47758b77c9736f4b2ef4073d4d51994fabfe349 # v3
+        uses: docker/setup-buildx-action@f7ce87c1d6bead3e36075b2ce75da1f6cc28aaca # v3
 
       - name: Build Docker Image
-        uses: docker/build-push-action@4f58ea79222b3b9dc2c8bbdd6debcef730109a75 # v6.9.0
+        uses: docker/build-push-action@0adf9959216b96bec444f325f1e493d4aa344497 # v6.14.0
         with:
           context: ${{ matrix.config.folder }}
           platforms: linux/amd64,linux/arm64
@@ -168,7 +168,7 @@ jobs:
           outputs: type=oci,dest=/tmp/${{ matrix.config.name }}-image.tar
 
       - name: Upload image as artifact
-        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4.4.3
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
         with:
           name: ${{ matrix.config.name }}-image.tar
           path: /tmp/${{ matrix.config.name }}-image.tar
@@ -184,7 +184,7 @@ jobs:
         run: echo "" > tag
 
       - name: Upload tag for tests
-        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4.4.3
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
         with:
           name: dev-${{ env.DATETIME }}
           path: tag

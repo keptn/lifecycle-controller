@@ -65,14 +65,14 @@ jobs:
           path: ./dist
 
       - name: Upload tag
-        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4.4.3
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
         with:
           name: tag
           path: |
             ./dist/dev-*/
 
       - name: Upload images
-        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4.4.3
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
         with:
           name: images
           path: |
@@ -99,7 +99,7 @@ jobs:
     steps:
       - name: Set up Go
         if: matrix.tool == 'kubeconform'
-        uses: actions/setup-go@41dfa10bad2bb2ae585af6ee5bb4d7d973ad74ed # v5
+        uses: actions/setup-go@f111f3307d8850f501ac008e886eec1fd1932a34 # v5
         with:
           go-version: ${{ env.GO_VERSION }}
           check-latest: true
@@ -157,7 +157,7 @@ jobs:
 
       - name: Upload KICS results
         if: always() && matrix.tool == 'kics'
-        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4.4.3
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
         with:
           name: kics-results
           path: results.json
@@ -236,7 +236,7 @@ jobs:
           tar -xvf images/${{ matrix.image }}-image.tar/${{ matrix.image }}-image.tar -C images/${{ matrix.image }}-image.tar/
 
       - name: Trivy image scan
-        uses: aquasecurity/trivy-action@915b19bbe73b92a6cf82a1bc12b087c9a19a5fe2 # 0.28.0
+        uses: aquasecurity/trivy-action@18f2510ee396bbf400402947b394f2dd8c87dbb0 # 0.29.0
         with:
           input: "images/${{ matrix.image }}-image.tar"
           severity: 'CRITICAL,HIGH'
@@ -254,7 +254,7 @@ jobs:
           - "keptn-cert-manager"
     steps:
       - name: Set up Go 1.x
-        uses: actions/setup-go@41dfa10bad2bb2ae585af6ee5bb4d7d973ad74ed # v5
+        uses: actions/setup-go@f111f3307d8850f501ac008e886eec1fd1932a34 # v5
         with:
           cache-dependency-path: ${{ matrix.artifact }}/go.sum
           go-version: ${{ env.GO_VERSION }}
